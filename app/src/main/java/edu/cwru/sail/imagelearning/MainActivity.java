@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -39,6 +40,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
 
 		iv = (ImageView) findViewById(R.id.imageView);
 
@@ -60,20 +62,32 @@ public class MainActivity extends Activity {
 		Button button_1 = (Button) findViewById(R.id.button1);
 		button_1.setOnClickListener(new View.OnClickListener(){
 			@Override
-			public void onClick(View v){
-				CSVWriter writer = null;
+			public void onClick(View v)  {
+
+
+
 				try {
-					writer = new CSVWriter(new FileWriter("016_spontaneous_smile_2.mp4.csv"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				String[] entries = "016_spontaneous_smile_2_001.jpg, 1".split(",");
-				writer.writeNext(entries);
-				try {
+					String filename = imgDir+File.separator+"016_spontaneous_smile_2.mp4.csv";
+					Log.e("hello", "1 ");
+					CSVWriter writer = null;
+					Log.e("hello", "2 ");
+					writer = new CSVWriter(new FileWriter(filename));
+					Log.e("hello", "3 ");
+					String[] entries = "016_spontaneous_smile_2_001.jpg, 1".split(",");
+					Log.e("hello", "4 ");
+					Log.d("A", String.valueOf(entries));
+					writer.writeNext(entries);
+					Log.e("hello", "5 ");
 					writer.close();
+					Log.e("hello", "6 ");
+					Toast.makeText(getApplicationContext(), "Hello2", Toast.LENGTH_SHORT).show();
+
 				} catch (IOException e) {
-					e.printStackTrace();
+					Log.e("hello", "aaaaaaaaa ");
 				}
+
+
+
 			}
 		});
 
